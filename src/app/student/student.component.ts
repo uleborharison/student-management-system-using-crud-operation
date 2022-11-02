@@ -32,10 +32,37 @@ export class StudentComponent implements OnInit {
     this.showUpdate = false;
   }
 
-  update() {
+  edit(data: any) {
     this.showAdd = false;
     this.showUpdate = true;
+    this.studentmodelobj.id = data.id;
+    this.formValue.controls['name'].setValue(data.name);
+    this.formValue.controls['email'].setValue(data.email);
+    this.formValue.controls['mobile'].setValue(data.mobile);
+    this.formValue.controls['city'].setValue(data.city);
   }
+
+  //update on edit
+  update() {
+    this.studentmodelobj.name = this.formValue.value.name;
+    this.studentmodelobj.email = this.formValue.value.email;
+    this.studentmodelobj.mobile = this.formValue.value.mobile;
+    this.studentmodelobj.city = this.formValue.value.city;
+    this.api
+      .updatestudent(this.studentmodelobj, this.studentmodelobj.id)
+      .subscribe(
+        (res) => {
+          this.formValue.reset();
+          this.getdata();
+          alert('Record updated successfully');
+        },
+        (err) => {
+          alert('Something went wrong');
+        }
+      );
+  }
+
+  //add student
 
   addstudent() {
     this.studentmodelobj.name = this.formValue.value.name;
@@ -46,6 +73,7 @@ export class StudentComponent implements OnInit {
       (res) => {
         console.log(res);
         this.formValue.reset();
+        this.getdata();
         alert('Record added successfully');
       },
       (err) => {
@@ -59,5 +87,14 @@ export class StudentComponent implements OnInit {
     this.api.getstudent().subscribe((res) => {
       this.allstudentdata = res;
     });
+  }
+
+  //delete
+  deletestud(data: any) {
+    if (confirm('Are you sure to delete?'))
+      this.api.deletestudent(data.id).subscribe((res) => {
+        alert('Record deleted successfully');
+        this.getdata();
+      });
   }
 }

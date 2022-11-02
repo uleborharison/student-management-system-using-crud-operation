@@ -29,9 +29,9 @@
       <td>{{data.mobile}}</td>
       <td>{{data.city}}</td>
       <td>
-        <button (click)="update()" type="button" class="btn btn-info" data-bs-toggle="modal"
+        <button (click)="edit(data)" type="button" class="btn btn-info" data-bs-toggle="modal"
           data-bs-target="#exampleModal">Edit</button> &nbsp;
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-danger" (click)="deletestud(data)">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -92,8 +92,10 @@ Button trigger modal
       </div>
       <div class="modal-footer" style="background-color:blue">
         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-        <button *ngIf="showAdd" type="button" class="btn btn-primary" (click)="addstudent()">Add</button>
-        <button *ngIf="showUpdate" type="button" class="btn btn-secondary">Update</button>
+        <button *ngIf="showAdd" type="button" class="btn btn-primary" (click)="addstudent()"
+          [disabled]="formValue.invalid">Add</button>
+        <button *ngIf="showUpdate" type="button" [disabled]="formValue.invalid" class="btn btn-secondary"
+          (click)="update()">Update</button>
       </div>
     </div>
   </div>
