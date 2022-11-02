@@ -22,12 +22,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>James</td>
-      <td>james@gmail.com</td>
-      <td>0710655252</td>
-      <td>Asaba</td>
+    <tr *ngFor="let data of allstudentdata">
+      <td>{{data.id}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.email}}</td>
+      <td>{{data.mobile}}</td>
+      <td>{{data.city}}</td>
       <td>
         <button (click)="update()" type="button" class="btn btn-info" data-bs-toggle="modal"
           data-bs-target="#exampleModal">Edit</button> &nbsp;
@@ -58,7 +58,7 @@ Button trigger modal
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="formValue">
           <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
             <input formControlName="name" type="name" class="form-control" id="exampleInputEmail1"
@@ -92,7 +92,7 @@ Button trigger modal
       </div>
       <div class="modal-footer" style="background-color:blue">
         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-        <button *ngIf="showAdd" type="button" class="btn btn-primary">Add</button>
+        <button *ngIf="showAdd" type="button" class="btn btn-primary" (click)="addstudent()">Add</button>
         <button *ngIf="showUpdate" type="button" class="btn btn-secondary">Update</button>
       </div>
     </div>
