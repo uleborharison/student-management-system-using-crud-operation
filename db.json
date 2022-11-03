@@ -8,6 +8,15 @@
       "city": "Asaba"
     }
   ],
+  "signup": [
+    {
+      "name": "Harry",
+      "email": "Hatty@gmail.com",
+      "mobile": 8032659874,
+      "password": "Harryphil",
+      "id": 1
+    }
+  ],
   "comments": [],
   "profile": {
     "name": "typicode"
